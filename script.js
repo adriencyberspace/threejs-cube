@@ -15,13 +15,19 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   document.body.appendChild(renderer.domElement);
+  
+  // depth, height, width 
+  const geometry = new THREE.BoxGeometry( .05, 2, 3);
+  
+  // Add any image to /textures and load here
+  const texture = new THREE.TextureLoader().load('textures/water.jpg');
 
-  const geometry = new THREE.BoxGeometry( .1, 2, 3);
-  const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  const material = new THREE.MeshBasicMaterial({ map: texture });
+
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
-  camera.position.z = 5;
+  camera.position.z = 4;
 
 }
 
@@ -29,8 +35,8 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
 
-  cube.rotation.x += 0.015;
-  cube.rotation.y += 0.01;
+  cube.rotation.x += 0.005;
+  cube.rotation.y += 0.02;
 
   renderer.render(scene, camera);
 }
